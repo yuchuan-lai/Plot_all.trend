@@ -45,7 +45,7 @@ ui <- fluidPage(
   selectInput("var", "Select the annual climate variable", choices = var.list, selected = var.list[1]),
   
   shinycssloaders::withSpinner(
-    plotlyOutput("plot"), 
+    plotlyOutput("plot", width = "1000px", height = "600px"), 
     hide.ui = FALSE, type = 3, color = "#666666", color.background = "#FFFFFF"
   )  
   
