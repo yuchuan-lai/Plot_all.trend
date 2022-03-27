@@ -43,20 +43,18 @@ ui <- fluidPage(
   titlePanel("Historical time series of annual temperature and precipitation anomalies at selected U.S. cities (interactive)"),
   
   selectInput("var", "Select the annual climate variable", choices = var.list, selected = var.list[1]),
-  plotlyOutput("plot", width = "900px", height = "600px")
   
+  shinycssloaders::withSpinner(
+    plotlyOutput("plot"), 
+    hide.ui = FALSE, type = 3, color = "#666666", color.background = "#FFFFFF"
+  )  
   
 )
 
 server <- function(input, output, session) {
 
-  output$plot <- 
-    shinycssloaders::withSpinner(
-      renderPlotly({
-      ts_plot(input$var)
-        }),
-      hide.ui = FALSE, type = 3, color = "#666666", color.background = "#FFFFFF"
-    )
+  output$plot <- renderPlotly({
+    ts_plot(input$var)})
   
 }
 
