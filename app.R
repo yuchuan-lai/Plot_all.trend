@@ -1,4 +1,7 @@
 library(plotly)
+library(shiny)
+library(ggplot2)
+library(dplyr)
 
 ts_plot <- function(select.var) {
   if (select.var == "Annual average temperature anomaly") {
@@ -47,12 +50,13 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
 
-  output$plot <- renderPlotly({
+  output$plot <- 
     shinycssloaders::withSpinner(
-      ts_plot(input$var),
+      renderPlotly({
+      ts_plot(input$var)
+        }),
       hide.ui = FALSE, type = 3, color = "#666666", color.background = "#FFFFFF"
     )
-  })
   
 }
 
