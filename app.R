@@ -48,7 +48,10 @@ ui <- fluidPage(
 server <- function(input, output, session) {
 
   output$plot <- renderPlotly({
-    ts_plot(input$var)
+    shinycssloaders::withSpinner(
+      ts_plot(input$var),
+      hide.ui = FALSE, type = 3, color = "#666666", color.background = "#FFFFFF"
+    )
   })
   
 }
